@@ -36,6 +36,21 @@ const CharacterController = {
 
         // Envoi du personnage
         res.json(character);
+    },
+
+    add: (req, res) => {
+
+        res.sendStatus(501);
+    },
+
+    update: (req, res) => {
+
+        res.sendStatus(501);
+    },
+
+    delete: (req, res) => {
+
+        res.sendStatus(501);
     }
 };
 
