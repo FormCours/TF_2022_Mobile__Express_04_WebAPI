@@ -49,8 +49,27 @@ const CharacterController = {
     },
 
     delete: (req, res) => {
+        console.log('Traitement de la requete "Delete"');
 
-        res.sendStatus(501);
+        // Récuperation de l'id
+        const id = parseInt(req.params.id);
+        console.log(' - ID => ', id, typeof (id));
+
+        // Obtenir l'index de l'element ciblé
+        const targetIndex = characters.findIndex(c => c.id === id);
+        console.log(' - Index => ', targetIndex);
+
+        // Si l'element n'existe pas => Erreur 404
+        if (targetIndex === -1) {
+            res.sendStatus(404);
+            return;
+        }
+
+        // Suppression de l'element ciblé
+        characters.splice(targetIndex, 1);
+
+        // Envoi d'une réponse « No content »
+        res.sendStatus(204);
     }
 };
 
