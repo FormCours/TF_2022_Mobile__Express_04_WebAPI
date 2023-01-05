@@ -18,8 +18,24 @@ const CharacterController = {
     },
 
     getById: (req, res) => {
+        console.log('Traitement de la requete "GetById"');
 
-        res.sendStatus(501);
+        // Récuperation de l'id contenu dans url (params)
+        const id = parseInt(req.params.id);
+        console.log('- ID => ', id, typeof (id));
+
+        // Obtenir le personnage à envoyer
+        const character = characters.find(c => c.id === id);
+        console.log('- PERSO => ', character);
+
+        // Envoi d'une erreur 404 si le personnage n'existe pas !
+        if (!character) {
+            res.sendStatus(404);
+            return;
+        }
+
+        // Envoi du personnage
+        res.json(character);
     }
 };
 
