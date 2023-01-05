@@ -1,5 +1,6 @@
 // Récuperation des données "personnage" via un fichier json
 const characters = require('../data/characters.json');
+let lastCharacterId = Math.max(...characters.map(c => c.id));
 
 // Définition du controller pour les personnages
 const CharacterController = {
@@ -39,8 +40,30 @@ const CharacterController = {
     },
 
     add: (req, res) => {
+        console.log('Traitement de la requete "Add"');
 
-        res.sendStatus(501);
+        // Best pratice -> Ajouter une étape de validation de donnée
+        console.log(' - Donnée recu : ', req.body);
+
+        // Incrementation de la valeur de l'id
+        lastCharacterId++;
+
+        // Création de l'objet à ajouter
+        const data = {
+            id: lastCharacterId,
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            serie: req.body.serie,
+        };
+
+        // Ajouter les données dans la collection de personnage
+        characters.push(data);
+
+        // Envoi d'un réponse qui indique qu'on a créer une ressource
+        // - Définition du location ()
+        res.location('/api/character/' + data.id);
+        // - Définition d'un reponse avec le code 201 et les données
+        res.status(201).json(data);
     },
 
     update: (req, res) => {

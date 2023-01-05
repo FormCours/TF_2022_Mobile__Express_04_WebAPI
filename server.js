@@ -14,6 +14,9 @@ const app = express();
 const morgan = require('morgan');
 app.use(morgan('tiny'));
 
+// Ajout du middleware pour gérer les données "application/json"
+app.use(express.json());
+
 // Utilisation du router
 const router = require('./routers/router');
 app.use('/api', router);
