@@ -14,6 +14,7 @@ npm run dev
 Projet :
 - Express
 - dotenv
+- morgan
 
 Outils de dev :
 - nodemon 
